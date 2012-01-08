@@ -6,6 +6,13 @@ import it.nicogiangregorio.utils.WebConstants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Verify if the answer provided by client is correct or not and redirect to
+ * correct jsp
+ * 
+ * @author nickg
+ * 
+ */
 public class CaptchaVerifyAction implements ICaptchaAction {
 
 	@Override

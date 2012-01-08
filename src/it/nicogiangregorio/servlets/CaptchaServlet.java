@@ -24,28 +24,6 @@ public class CaptchaServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -243950967076586170L;
 
-	// public static List<CaptchaBean> captchaImages;
-
-	// /**
-	// * @see HttpServlet#HttpServlet()
-	// */
-	// public CaptchaServlet() {
-	// super();
-	// }
-	//
-	// /**
-	// * @see Servlet#init(ServletConfig)
-	// */
-	// public void init(ServletConfig config) throws ServletException {
-	// super.init(config);
-	// captchaImages = new ArrayList<CaptchaBean>();
-	// captchaImages.add(starCaptcha);
-	// captchaImages.add(heartCaptcha);
-	// captchaImages.add(bwmCaptcha);
-	// captchaImages.add(diamondCaptcha);
-	//
-	// }
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

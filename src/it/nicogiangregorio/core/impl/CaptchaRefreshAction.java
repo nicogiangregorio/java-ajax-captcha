@@ -12,6 +12,14 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Strategy for Refreshing action: Reset captcha order and right answer to
+ * captcha question, then forward to correct jsp otherwise forward to a courtesy
+ * jsp
+ * 
+ * @author Nico Giangregorio
+ * 
+ */
 public class CaptchaRefreshAction implements ICaptchaAction {
 
 	@Override

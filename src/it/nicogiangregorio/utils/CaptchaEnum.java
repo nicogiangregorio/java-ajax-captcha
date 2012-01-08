@@ -1,10 +1,16 @@
 package it.nicogiangregorio.utils;
 
+/**
+ * Associate CSS info to a given image and enumerate them. This is immutable
+ * andserializable. It strongly replaces a bean
+ * 
+ * @author Nico Giangregorio
+ * 
+ */
 public enum CaptchaEnum {
-	STAR("-120px", "-3px", "-120px", "-66px"), 
-	HEART("0", "-3px", "0px","-66px"), 
-	BWM("-56px", "-3px", "-56px", "-66px"), 
-	DIAMOND("-185px","-3px", "-185px", "-66px");
+	STAR("-120px", "-3px", "-120px", "-66px"), HEART("0", "-3px", "0px",
+			"-66px"), BWM("-56px", "-3px", "-56px", "-66px"), DIAMOND("-185px",
+			"-3px", "-185px", "-66px");
 
 	private final String onTop;
 	private final String onLeft;

@@ -8,15 +8,6 @@ package it.nicogiangregorio.utils;
  * 
  */
 public class WebConstants {
-	// public static final CaptchaBean starCaptcha = new CaptchaBean("star",
-	// "-120px", "-3px", "-120px", "-66px");
-	// public static final CaptchaBean heartCaptcha = new CaptchaBean("heart",
-	// "0", "-3px", "0px", "-66px");
-	// public static final CaptchaBean bwmCaptcha = new CaptchaBean("bwm",
-	// "-56px", "-3px", "-56px", "-66px");
-	// public static final CaptchaBean diamondCaptcha = new
-	// CaptchaBean("diamond",
-	// "-185px", "-3px", "-185px", "-66px");
 	public static final String NICK_DEMO = "nick_demo";
 	public static final String PARAM_ACTION = "action";
 	public static final String ACTION_VERIFY = "verify";
@@ -34,7 +25,7 @@ public class WebConstants {
 	public static final String ATTR_CAPTCHA_IMAGES = "captchaImages";
 	public static final String ATTR_RIGHT_ANSWER = "rightAnswer";
 
-	// Not istantiable
+	// Enforce non-istantiability
 	private WebConstants() {
 	}
 }

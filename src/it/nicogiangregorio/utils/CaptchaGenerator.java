@@ -6,6 +6,12 @@ import java.security.SecureRandom;
 
 import sun.misc.BASE64Encoder;
 
+/**
+ * Singleton implementation. Useful to random codes to associate with images
+ * 
+ * @author nickg
+ * 
+ */
 public enum CaptchaGenerator {
 
 	INSTANCE;
