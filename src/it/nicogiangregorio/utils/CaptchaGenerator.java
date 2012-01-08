@@ -7,20 +7,20 @@ import java.security.SecureRandom;
 import sun.misc.BASE64Encoder;
 
 /**
- * Singleton implementation. Useful to random codes to associate with images
+ * Helper class to generate random code to associate with captcha
  * 
- * @author nickg
+ * @author Nico Giangregorio
  * 
  */
-public enum CaptchaGenerator {
+public class CaptchaGenerator {
 
-	INSTANCE;
+	private CaptchaGenerator() {
+	}
 
-	public String createCaptchaCodes() {
+	public static String createCaptchaCodes() {
 
 		MessageDigest digest = null;
 		byte[] result = {};
-		String hashedResult = null;
 
 		SecureRandom rand = new SecureRandom();
 		BASE64Encoder encoderToBase64 = new BASE64Encoder();
@@ -36,8 +36,7 @@ public enum CaptchaGenerator {
 
 		String randString = "" + rand.nextDouble();
 		result = digest.digest(randString.getBytes());
-		hashedResult = encoderToBase64.encode(result);
 
-		return hashedResult;
+		return encoderToBase64.encode(result);
 	}
 }

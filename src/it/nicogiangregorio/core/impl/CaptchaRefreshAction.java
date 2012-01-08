@@ -30,13 +30,13 @@ public class CaptchaRefreshAction implements ICaptchaAction {
 
 		try {
 			captchaCodes.put(CaptchaEnum.STAR,
-					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+					CaptchaGenerator.createCaptchaCodes());
 			captchaCodes.put(CaptchaEnum.HEART,
-					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+					CaptchaGenerator.createCaptchaCodes());
 			captchaCodes.put(CaptchaEnum.BWM,
-					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+					CaptchaGenerator.createCaptchaCodes());
 			captchaCodes.put(CaptchaEnum.DIAMOND,
-					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+					CaptchaGenerator.createCaptchaCodes());
 		} catch (IllegalStateException e) {
 			return WebConstants.ERROR_FORWARD_JSP;
 		}
