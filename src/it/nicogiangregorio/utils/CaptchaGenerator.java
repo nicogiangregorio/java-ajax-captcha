@@ -6,38 +6,31 @@ import java.security.SecureRandom;
 
 import sun.misc.BASE64Encoder;
 
-public class CaptchaGenerator implements WebConstants {
+public enum CaptchaGenerator {
 
-	public static CaptchaGenerator CAPTCHA_GEN;
-
-	public static CaptchaGenerator getIstance() {
-		if (CAPTCHA_GEN == null)
-			CAPTCHA_GEN = new CaptchaGenerator();
-		return CAPTCHA_GEN;
-	}
+	INSTANCE;
 
 	public String createCaptchaCodes() {
 
 		MessageDigest digest = null;
-		SecureRandom rand = null;
-		byte[] result = null;
-		BASE64Encoder encoderToBase64 = null;
+		byte[] result = {};
 		String hashedResult = null;
 
+		SecureRandom rand = new SecureRandom();
+		BASE64Encoder encoderToBase64 = new BASE64Encoder();
+
 		try {
-			rand = new SecureRandom();
 
-			encoderToBase64 = new BASE64Encoder();
 			digest = MessageDigest.getInstance("SHA-256");
-			digest.update(NICK_DEMO.getBytes());
+			digest.update(WebConstants.NICK_DEMO.getBytes());
 
-			String randString = "" + rand.nextDouble();
-			result = digest.digest(randString.getBytes());
-			hashedResult = encoderToBase64.encode(result);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException(e);
 		}
+
+		String randString = "" + rand.nextDouble();
+		result = digest.digest(randString.getBytes());
+		hashedResult = encoderToBase64.encode(result);
 
 		return hashedResult;
 	}

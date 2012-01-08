@@ -1,8 +1,7 @@
 package it.nicogiangregorio.core.impl;
 
 import it.nicogiangregorio.core.ICaptchaAction;
-import it.nicogiangregorio.servlets.CaptchaServlet;
-import it.nicogiangregorio.utils.CaptchaBean;
+import it.nicogiangregorio.utils.CaptchaEnum;
 import it.nicogiangregorio.utils.CaptchaGenerator;
 import it.nicogiangregorio.utils.WebConstants;
 
@@ -13,35 +12,42 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CaptchaRefreshAction implements ICaptchaAction, WebConstants {
-
-	private static CaptchaGenerator captchaGen = CaptchaGenerator.getIstance();
+public class CaptchaRefreshAction implements ICaptchaAction {
 
 	@Override
 	public String process(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		Map<String, String> captchaCodes = new HashMap<String, String>();
-		captchaCodes.put(starCaptcha.getIdCaptcha(),
-				captchaGen.createCaptchaCodes());
-		captchaCodes.put(heartCaptcha.getIdCaptcha(),
-				captchaGen.createCaptchaCodes());
-		captchaCodes.put(bwmCaptcha.getIdCaptcha(),
-				captchaGen.createCaptchaCodes());
-		captchaCodes.put(diamondCaptcha.getIdCaptcha(),
-				captchaGen.createCaptchaCodes());
+		Map<CaptchaEnum, String> captchaCodes = new HashMap<CaptchaEnum, String>();
+
+		try {
+			captchaCodes.put(CaptchaEnum.STAR,
+					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+			captchaCodes.put(CaptchaEnum.HEART,
+					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+			captchaCodes.put(CaptchaEnum.BWM,
+					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+			captchaCodes.put(CaptchaEnum.DIAMOND,
+					CaptchaGenerator.INSTANCE.createCaptchaCodes());
+		} catch (IllegalStateException e) {
+			return WebConstants.ERROR_FORWARD_JSP;
+		}
 
 		int index = new Random().nextInt(captchaCodes.size());
+		CaptchaEnum rightAnswer = CaptchaEnum.values()[index];
 
-		CaptchaBean rightAnswer = (CaptchaBean) CaptchaServlet.captchaImages
-				.get(index);
+		request.getSession().setAttribute(WebConstants.ATTR_CAPTCHA_IMAGES,
+				CaptchaEnum.values());
 
-		request.getSession().setAttribute(ATTR_CAPTCHA_IMAGES,
-				CaptchaServlet.captchaImages);
-		request.getSession().setAttribute(ATTR_CAPTCHA_ANSWER,
-				captchaCodes.get(rightAnswer.getIdCaptcha()));
-		request.getSession().setAttribute(ATTR_RIGHT_ANSWER, rightAnswer);
-		request.getSession().setAttribute(ATTR_CAPTCHA_CODES, captchaCodes);
-		return REFRESH_FORWARD_JSP;
+		request.getSession().setAttribute(WebConstants.ATTR_CAPTCHA_ANSWER,
+				captchaCodes.get(rightAnswer));
+
+		request.getSession().setAttribute(WebConstants.ATTR_RIGHT_ANSWER,
+				rightAnswer);
+
+		request.getSession().setAttribute(WebConstants.ATTR_CAPTCHA_CODES,
+				captchaCodes);
+
+		return WebConstants.REFRESH_FORWARD_JSP;
 	}
 }

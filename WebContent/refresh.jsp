@@ -1,3 +1,4 @@
+<%@page import="it.nicogiangregorio.utils.CaptchaEnum"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="it.nicogiangregorio.utils.WebConstants"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,17 +10,15 @@
 </head>
 <c:set var="ATTR_CAPTCHA_CODES"
 	value="<%=request.getSession().getAttribute(WebConstants.ATTR_CAPTCHA_CODES) %>"></c:set>
-<c:set var="ATTR_CAPTCHA_IMAGES"
-	value="<%=request.getSession().getAttribute(WebConstants.ATTR_CAPTCHA_IMAGES) %>"></c:set>
 <c:set var="ATTR_CAPTCHA_ANSWER"
 	value="<%=request.getSession().getAttribute(WebConstants.ATTR_CAPTCHA_ANSWER) %>"></c:set>
 <c:set var="ATTR_RIGHT_ANSWER"
 	value="<%=request.getSession().getAttribute(WebConstants.ATTR_RIGHT_ANSWER) %>"></c:set>
 
 <div class='captchaWrapper' id='captchaWrapper'>
-	<c:forEach var="captchaImage" items="${ATTR_CAPTCHA_IMAGES }" varStatus="status">
+	<c:forEach var="captchaImage" items="<%=it.nicogiangregorio.utils.CaptchaEnum.values() %>" varStatus="status">
 		<a href='#' class='captchaRefresh'></a>
-		<div id="draggable_${ATTR_CAPTCHA_CODES[captchaImage.idCaptcha]}"
+		<div id="draggable_${ATTR_CAPTCHA_CODES[captchaImage]}"
 			class='draggable'
 			style='left: ${ ((status.count - 1) * 68) + 15 }px;background-position:${captchaImage.onTop} ${captchaImage.onLeft}'>
 		</div>
