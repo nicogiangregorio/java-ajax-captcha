@@ -44,9 +44,6 @@ public class CaptchaRefreshAction implements ICaptchaAction {
 		int index = new Random().nextInt(captchaCodes.size());
 		CaptchaEnum rightAnswer = CaptchaEnum.values()[index];
 
-		request.getSession().setAttribute(WebConstants.ATTR_CAPTCHA_IMAGES,
-				CaptchaEnum.values());
-
 		request.getSession().setAttribute(WebConstants.ATTR_CAPTCHA_ANSWER,
 				captchaCodes.get(rightAnswer));
 
